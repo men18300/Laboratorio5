@@ -51,7 +51,7 @@ void loop()
     seleccion = Serial.read();
 
     if (seleccion == '1') {
-      Serial.println("Este esss Donkey Kong:");
+
       imprimirDonkey();
 
     }
@@ -63,6 +63,12 @@ void loop()
       imprimirScorpion();
 
     }
+    else if (seleccion == '4') {
+      myFile = SD.open("/");
+      printDirectory(myFile, 0);
+      menu();
+    }
+
     else {
       Serial.println("Lo siento :( esa opcion no existe");
 
@@ -140,9 +146,9 @@ void printDirectory(File dir, int numTabs) {
       // no more files
       break;
     }
-    for (uint8_t i = 0; i < numTabs; i++) {
-      Serial.print('\t');
-    }
+ //   for (uint8_t i = 0; i < numTabs; i++) {
+   //   Serial.print('\t');
+  //  }
     Serial.print(entry.name());
     if (entry.isDirectory()) {
       Serial.println("/");
@@ -153,11 +159,11 @@ void printDirectory(File dir, int numTabs) {
       Serial.println(entry.size(), DEC);
     }
     entry.close();
-
-
   }
 }
 
+
+//Menu que nos muestra las opciones que hay
 void menu(void) {
   Serial.println("");
   Serial.println("");
@@ -165,5 +171,6 @@ void menu(void) {
   Serial.println("1---->Para ver a Donkey Kong:");
   Serial.println("2---->Para ver a Link:");
   Serial.println("3---->Para ver a Scorpion:");
+  Serial.println("4---->Para ver los archivos en la SD:");
 
 }
