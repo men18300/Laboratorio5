@@ -37,21 +37,22 @@ void setup()
   printDirectory(myFile, 0);
   Serial.println("done!");
 
+//Imprimimos el menu de todo lo que hay en la SD
   menu();
-
-
 }
 
 
 void loop()
 {
 
+  //Verificamos que el usuario escriba algo en el monitor
   if (Serial.available() > 0) {
 
+    //Leemos lo que el usuario ingresa
     seleccion = Serial.read();
 
     if (seleccion == '1') {
-
+      //Imprimimos cada persona dependiendo de la eleccion
       imprimirDonkey();
 
     }
@@ -64,12 +65,16 @@ void loop()
 
     }
     else if (seleccion == '4') {
+
+  //Volvemos a mostrar el directorio si asi lo desea el usuario    
   myFile = SD.open("/");
   printDirectory(myFile, 0);
       menu();
     }
 
     else {
+
+      //Cuando el usuario ingresa cualquier otra opcion no valida
       Serial.println("Lo siento :( esa opcion no existe");
 
     }
@@ -93,6 +98,8 @@ void imprimirLink(void) {
     // if the file didn't open, print an error:
     Serial.println("error opening test.txt");
   }
+
+  //Imprimimos el menu despues de cada figura
   menu();
 }
 
@@ -139,9 +146,12 @@ void imprimirDonkey(void) {
 
 //Funcion que nos muestra el directorio de la SD
 void printDirectory(File dir, int numTabs) {
+
+  //Utilizamos esta funcion para que nos muestra el directorio completo cada vez que lo necesitemos
   dir.rewindDirectory();
   while (true) {
 
+    //Abre el siguiento archivo dependiendo donde se quedo el puntero
     File entry =  dir.openNextFile();
     if (! entry) {
       // no more files
