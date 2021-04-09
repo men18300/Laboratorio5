@@ -64,8 +64,8 @@ void loop()
 
     }
     else if (seleccion == '4') {
-      myFile = SD.open("/");
-      printDirectory(myFile, 0);
+  myFile = SD.open("/");
+  printDirectory(myFile, 0);
       menu();
     }
 
@@ -139,6 +139,7 @@ void imprimirDonkey(void) {
 
 //Funcion que nos muestra el directorio de la SD
 void printDirectory(File dir, int numTabs) {
+  dir.rewindDirectory();
   while (true) {
 
     File entry =  dir.openNextFile();
